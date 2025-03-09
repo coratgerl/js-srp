@@ -1,0 +1,29 @@
+{
+  "name": "js-srp",
+  "description": "Bun S3 adapter for Wabe",
+  "author": {
+    "name": "coratgerl",
+    "url": "https://github.com/coratgerl"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "secure-remote-password",
+    "srp",
+    "cryptography"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+     "build": "bun build --outdir dist $(pwd)/src/index.ts && bun generate:types",
+     "generate:types": "dts-bundle-generator -o dist/index.d.ts src/index.ts --no-check",
+     "check": "tsc --project $(pwd)/tsconfig.json",
+     "lint": "biome lint . --no-errors-on-unmatched",
+     "ci": "bun check && bun lint $(pwd) && bun test src",
+     "format": "biome format --write ."
+   },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "5.8.2",
+    "dts-bundle-generator": "9.5.1",
+    "@biomejs/biome": "1.9.4"
+  }
+}
