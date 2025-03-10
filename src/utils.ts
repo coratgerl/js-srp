@@ -1,3 +1,21 @@
+const arrayBufferToBase64 = (buffer: ArrayBuffer) =>
+  Array.from(new Uint8Array(buffer))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('')
+
+export const sha256 = async (text: string) => {
+  const encodedText = new TextEncoder().encode(text)
+
+  const hashArrayBuffer = await crypto.subtle.digest('SHA-256', encodedText)
+
+  return arrayBufferToBase64(hashArrayBuffer)
+}
+
+export const getRandomString = (length = 32) =>
+  arrayBufferToBase64(crypto.getRandomValues(new Uint8Array(length)).buffer)
+    .slice(0, length)
+    .replace(/[\W_]/g, 'a')
+
 const largePrimeNumber = `
     AC6BDB41 324A9A9B F166DE5E 1389582F AF72B665 1987EE07 FC319294
     3DB56050 A37329CB B4A099ED 8193E075 7767A13D D52312AB 4B03310D
@@ -12,16 +30,7 @@ const largePrimeNumber = `
 `
 const cleanLarmePrimeNumber = largePrimeNumber.replace(/\s+/g, '')
 
-export const sha256 = async (text: string) => {
-  const encodedText = new TextEncoder().encode(text)
-
-  const hashArrayBuffer = await crypto.subtle.digest('SHA-256', encodedText)
-
-  return Array.from(new Uint8Array(hashArrayBuffer))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('')
-}
-
 export const N = BigInt(`0x${cleanLarmePrimeNumber}`)
-export const g = 2 // g = 2 is a generator modulo
+export const g = BigInt(2) // g = 2 is a generator modulo
 export const k = sha256(`${N}${g}`)
+export const outputBytes = 256 / 8

@@ -1,15 +1,7 @@
 # js-srp
 
-To install dependencies:
+Implementation of the Secure Remote Password protocol in JavaScript.
 
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.2.4. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+RFC 2945 - SRP-6a
+https://www.rfc-editor.org/rfc/pdfrfc/rfc2945.txt.pdf
+https://www.rfc-editor.org/rfc/pdfrfc/rfc5054.txt.pdf
