@@ -1,4 +1,4 @@
-const hexString = `
+const largePrimeNumber = `
     AC6BDB41 324A9A9B F166DE5E 1389582F AF72B665 1987EE07 FC319294
     3DB56050 A37329CB B4A099ED 8193E075 7767A13D D52312AB 4B03310D
     CD7F48A9 DA04FD50 E8083969 EDB767B0 CF609517 9A163AB3 661A05FB
@@ -10,9 +10,18 @@ const hexString = `
     94B5C803 D89F7AE4 35DE236D 525F5475 9B65E372 FCD68EF2 0FA7111F
     9E4AFF73
 `
+const cleanLarmePrimeNumber = largePrimeNumber.replace(/\s+/g, '')
 
-const hexStringClean = hexString.replace(/\s+/g, '')
+export const sha256 = async (text: string) => {
+  const encodedText = new TextEncoder().encode(text)
 
-const integerValue = BigInt(`0x${hexStringClean}`)
+  const hashArrayBuffer = await crypto.subtle.digest('SHA-256', encodedText)
 
-console.log(integerValue.toString())
+  return Array.from(new Uint8Array(hashArrayBuffer))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('')
+}
+
+export const N = BigInt(`0x${cleanLarmePrimeNumber}`)
+export const g = 2 // g = 2 is a generator modulo
+export const k = sha256(`${N}${g}`)
