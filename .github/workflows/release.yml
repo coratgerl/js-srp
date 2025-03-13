@@ -6,7 +6,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    name: "Release js-srp"
+    name: "Release js-srp6a"
 
     permissions:
       contents: write
@@ -35,7 +35,7 @@ jobs:
         id: previousTag
         run: |
           echo "Fetching tags..."
-          previous_tag=$(git tag -l "js-srp-[0-9]*" --sort=-v:refname | head -n 1)
+          previous_tag=$(git tag -l "js-srp6a-[0-9]*" --sort=-v:refname | head -n 1)
           echo "Found previous tag: $previous_tag"
           echo "tag=$previous_tag" >> $GITHUB_ENV
 
@@ -67,7 +67,7 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/js-srp-${{env.next_version}}',
+              ref: 'refs/tags/js-srp6a-${{env.next_version}}',
               sha: context.sha
             })
 
@@ -76,7 +76,7 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v4.2.2
         with:
           fromTag: ${{ env.tag }}
-          toTag: js-srp-${{env.next_version}}
+          toTag: js-srp6a-${{env.next_version}}
           configurationJson: |
             {
               "categories": [
@@ -108,7 +108,7 @@ jobs:
               "pr_template": "- #{{TITLE}} (by @#{{AUTHOR}} in ##{{NUMBER}}) ",
               "label_extractor": [
                   {
-                    "pattern": "^(ci|chore|doc|docs|feat|fix|bug|perf|refactor|test|tests)\\(js-srp\\):(.*)",
+                    "pattern": "^(ci|chore|doc|docs|feat|fix|bug|perf|refactor|test|tests)\\(js-srp6a\\):(.*)",
                     "target": "$1",
                     "on_property": "title"
                   }
@@ -121,5 +121,5 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: js-srp-${{env.next_version}}
+          tag_name: js-srp6a-${{env.next_version}}
           body: ${{steps.github_release.outputs.changelog}}

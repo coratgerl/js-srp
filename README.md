@@ -1,4 +1,4 @@
-# js-srp
+# js-srp6a
 
 Modern implmentation of SRP for Node.js /Bun and web browsers.
 [RFC 2945](https://datatracker.ietf.org/doc/html/rfc2945)
@@ -9,8 +9,8 @@ Living fork of [srp](https://github.com/swan-io/srp).
 ## Installation
 
 ```sh
-yarn add js-srp
-bun add js-srp
+yarn add js-srp6a
+bun add js-srp6a
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ bun add js-srp
 When creating an account with the server, the client will provide a salt and a verifier for the server to store. They are calculated by the client as follows:
 
 ```ts
-import { createSRPClient } from "js-srp";
+import { createSRPClient } from "js-srp6a";
 const client = createSRPClient("SHA-256", 2048);
 
 // These should come from the user signing up
@@ -46,7 +46,7 @@ Authenticating with the server involves multiple steps.
 **1** - The client generates a secret/public ephemeral value pair.
 
 ```ts
-import { createSRPClient } from "js-srp";
+import { createSRPClient } from "js-srp6a";
 const client = createSRPClient("SHA-256", 2048);
 
 // This should come from the user logging in
@@ -61,7 +61,7 @@ const clientEphemeral = client.generateEphemeral();
 _note:_ if no user cannot be found in the database, a bogus salt and ephemeral value should be returned, to avoid leaking which users have signed up.
 
 ```ts
-import { createSRPServer } from "js-srp";
+import { createSRPServer } from "js-srp6a";
 const server = createSRPServer("SHA-256", 2048);
 
 // This should come from the user database
@@ -77,7 +77,7 @@ const serverEphemeral = await server.generateEphemeral(verifier);
 **3** - The client can now derive the shared strong session key and a proof of it to provide to the server.
 
 ```ts
-import { createSRPClient } from "js-srp";
+import { createSRPClient } from "js-srp6a";
 const client = createSRPClient("SHA-256", 2048);
 
 // This should come from the user logging in
@@ -98,7 +98,7 @@ const clientSession = await client.deriveSession(
 **4** - The server is also ready to derive the shared strong session key and can verify that the client has the same key using the provided proof.
 
 ```ts
-import { createSRPServer } from "js-srp";
+import { createSRPServer } from "js-srp6a";
 const server = createSRPServer("SHA-256", 2048);
 
 // Previously stored `serverEphemeral.secret`
@@ -119,7 +119,7 @@ const serverSession = await server.deriveSession(
 **5** - Finally, the client can verify that the server has derived the correct strong session key, using the proof that the server sent back.
 
 ```ts
-import { createSRPClient } from "js-srp";
+import { createSRPClient } from "js-srp6a";
 const client = createSRPClient("SHA-256", 2048);
 
 await client.verifySession(
@@ -134,7 +134,7 @@ await client.verifySession(
 ### Client
 
 ```ts
-import { createSRPClient } from "js-srp";
+import { createSRPClient } from "js-srp6a";
 
 type HashAlgorithm = "SHA-1" | "SHA-256" | "SHA-384" | "SHA-512";
 type PrimeGroup = 1024 | 1536 | 2048 | 3072 | 4096 | 6144 | 8192;
@@ -229,7 +229,7 @@ type verifySession = (
 ### Server
 
 ```ts
-import { createSRPServer } from "js-srp";
+import { createSRPServer } from "js-srp6a";
 
 type HashAlgorithm = "SHA-1" | "SHA-256" | "SHA-384" | "SHA-512";
 type PrimeGroup = 1024 | 1536 | 2048 | 3072 | 4096 | 6144 | 8192;
