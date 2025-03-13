@@ -24,4 +24,6 @@ tsconfig.build.json
 bun.lock
 dev
 fixtures
-LICENSE
+LICENSE.md
+biome.json
+bunfig.toml
