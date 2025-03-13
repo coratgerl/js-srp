@@ -1,6 +1,6 @@
 {
 	"name": "js-srp6a",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"license": "MIT",
 	"description": "A modern SRP implementation for Node.js / Bun and web browsers",
 	"author": "Linus Unnebäck <linus@folkdatorn.se>",
