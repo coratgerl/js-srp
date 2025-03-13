@@ -18,7 +18,10 @@ CONTRIBUTING.md
 CODE_OF_CONDUCT.md
 CHANGELOG.md
 tsconfig.json
+tsconfig.build.json
 .git
-bun.lockb
+.github
+bun.lock
 dev
 fixtures
+LICENSE
