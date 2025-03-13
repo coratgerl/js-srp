@@ -5,10 +5,10 @@
 	"description": "A modern SRP implementation for Node.js / Bun and web browsers",
 	"author": "Linus Unnebäck <linus@folkdatorn.se>",
 	"contributors": ["Mathieu Acthernoene <mathieu.acthenoene@swan.io>", "Coratger Lucas"],
-	"homepage": "https://github.com/coratgerl/js-srp#readme",
+	"homepage": "https://github.com/palixir/js-srp#readme",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/coratgerl/js-srp.git"
+		"url": "https://github.com/palixir/js-srp.git"
 	},
 	"main": "dist/index.js",
 	"keywords": ["srp", "srp6a", "authentication", "remote", "password", "security", "bun"],
